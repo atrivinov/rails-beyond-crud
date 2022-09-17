@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
   resources :restaurants do
+    resources :reviews, only: [:new, :create]
     collection do
       get :top # short sintax for get "top", to: "restaurants#top", as: :top_restaurants
       # /restaurants/top
@@ -9,11 +11,5 @@ Rails.application.routes.draw do
       get :chef
     end
   end
-
-  # resources :users do # / REST
-    # collection do
-      # get :top
-      # /users/top
-    # end
-  # end
+  resources :reviews, only: [:destroy]
 end
